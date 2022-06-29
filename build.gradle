@@ -1,0 +1,132 @@
+plugins {
+    id "java"
+    id "groovy"
+    id "idea"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "io.micronaut.application" version "3.4.1"
+    id "com.diffplug.spotless" version "${spotlessVersion}"
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+spotless {
+    java {
+        googleJavaFormat()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    groovy {
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+    }
+
+    groovyGradle {
+        target "*.gradle", "**/*.gradle"
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+    }
+
+    format "misc", {
+        target "**/*.md", "**/*.yml", "**/*.sql"
+        trimTrailingWhitespace()
+        indentWithSpaces(2)
+        endWithNewline()
+    }
+
+    lineEndings "UNIX"
+}
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    annotationProcessor "io.micronaut:micronaut-inject-java"
+    annotationProcessor "io.micronaut:micronaut-http-validation"
+    annotationProcessor "io.micronaut:micronaut-graal"
+    annotationProcessor "io.micronaut.data:micronaut-data-processor"
+    annotationProcessor "io.micronaut.openapi:micronaut-openapi"
+    annotationProcessor "io.micronaut.security:micronaut-security-annotations"
+    compileOnly "org.graalvm.nativeimage:svm"
+
+    implementation "javax.inject:javax.inject:1"
+    implementation "io.micronaut:micronaut-validation"
+    implementation "io.micronaut.security:micronaut-security-jwt"
+    implementation "io.micronaut.redis:micronaut-redis-lettuce"
+    implementation "io.micronaut.aws:micronaut-function-aws-api-proxy"
+    implementation "io.micronaut.aws:micronaut-function-aws-custom-runtime"
+    implementation "io.micronaut:micronaut-http-server-netty"
+    implementation "io.micronaut:micronaut-http-client"
+    implementation "io.micronaut.reactor:micronaut-reactor"
+    implementation "io.micronaut.reactor:micronaut-reactor-http-client"
+    implementation "io.micronaut:micronaut-jackson-databind"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-csv"
+    implementation "io.micronaut.data:micronaut-data-r2dbc"
+    implementation "io.micronaut.sql:micronaut-jdbc-hikari"
+    implementation "io.micronaut.flyway:micronaut-flyway"
+    implementation "jakarta.persistence:jakarta.persistence-api:3.0.0"
+    runtimeOnly "dev.miku:r2dbc-mysql"
+    runtimeOnly "mysql:mysql-connector-java"
+    runtimeOnly "org.flywaydb:flyway-mysql"
+    // runtimeOnly "io.r2dbc:r2dbc-postgresql"
+    // runtimeOnly "org.postgresql:postgresql"
+    runtimeOnly "ch.qos.logback:logback-classic"
+
+    implementation "io.micronaut.email:micronaut-email-javamail:1.3.0"
+    implementation "io.micronaut.email:micronaut-email-template"
+    implementation "io.micronaut.views:micronaut-views-thymeleaf"
+
+    implementation "org.springframework.security:spring-security-crypto:${springSecurityVersion}"
+    implementation "io.micronaut.aws:micronaut-aws-sdk-v2"
+    implementation "io.swagger.core.v3:swagger-annotations"
+    implementation "jakarta.annotation:jakarta.annotation-api"
+
+    testImplementation "org.testcontainers:mysql"
+    testImplementation "org.testcontainers:spock"
+    testImplementation "org.testcontainers:testcontainers"
+    testImplementation "io.micronaut:micronaut-function"
+}
+
+application {
+    mainClass.set("com.bigtreetc.sample.micronaut.aws.lambda.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("lambda_provided")
+    testRuntime("spock2")
+    processing {
+        incremental(true)
+        annotations("com.bigtreetc.sample.*")
+    }
+}
+
+tasks.named("dockerfileNative") {
+    args(
+        "-XX:MaximumHeapSizePercent=80",
+        "-Dio.netty.allocator.numDirectArenas=0",
+        "-Dio.netty.noPreferDirect=true"
+    )
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.fork = true
+    options.forkOptions.jvmArgs += [
+        "-Dmicronaut.openapi.views.spec=swagger-ui.enabled=true",
+        "-Dmicronaut.openapi.server.context.path=/api"
+    ]
+}
+
+compileJava.dependsOn "spotlessApply"

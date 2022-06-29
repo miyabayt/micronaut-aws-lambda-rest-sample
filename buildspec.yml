@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 19
+  build:
+    commands:
+      - echo Build started on `date`
+      - cd ${src_dir}
+      - ./gradlew -x spotlessApply clean buildNativeLambda
+  post_build:
+    commands:
+      - mv build/libs/*-lambda.zip build/libs/lambda.zip
+      - aws lambda update-function-code --function-name ${lambda_function_name} --zip-file fileb://build/libs/lambda.zip 1> /dev/null
+
+cache:
+  paths:
+    - '/root/.gradle/wrapper/**/*'
+    - '/root/.gradle/caches/**/*'
+    - '.gradle/**/*'
+    - '/root/.m2/**/*'

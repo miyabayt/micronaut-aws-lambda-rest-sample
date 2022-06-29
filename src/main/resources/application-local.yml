@@ -1,0 +1,35 @@
+r2dbc:
+  datasources:
+    default:
+      url: r2dbc:mysql://192.168.64.3:30306/micronaut-aws-lambda-rest-sample?useSSL=false&characterEncoding=UTF-8
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: root
+      password: passw0rd
+      schema-generate: NONE
+      dialect: MYSQL
+flyway:
+  datasources:
+    default:
+      enabled: true
+      default-schema: micronaut-aws-lambda-rest-sample
+      url: jdbc:mysql://192.168.64.3:30306/?useSSL=false&characterEncoding=UTF-8
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: root
+      password: passw0rd
+redis:
+  uri: redis://192.168.64.3:32379
+javamail:
+  authentication:
+    username: ${SMTP_USERNAME:''}
+    password: ${SMTP_PASSWORD:''}
+  properties:
+    mail:
+      smtp:
+        host: 192.168.64.3
+        port: 31025
+logger:
+  levels:
+    io.micronaut.data.query: DEBUG
+
+application:
+  fileUploadLocation: build/sample

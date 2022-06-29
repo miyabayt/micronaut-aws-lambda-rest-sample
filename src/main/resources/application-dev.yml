@@ -1,0 +1,35 @@
+r2dbc:
+  datasources:
+    default:
+      url: ${R2DBC_DATASOURCES_DEFAULT_URL:`r2dbc:mysql://CHANGE_ME:3306/micronaut-aws-lambda-rest-sample?useSSL=false&characterEncoding=UTF-8`}
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: ${R2DBC_DATASOURCES_DEFAULT_USERNAME:''}
+      password: ${R2DBC_DATASOURCES_DEFAULT_PASSWORD:''}
+      schema-generate: NONE
+      dialect: MYSQL
+flyway:
+  datasources:
+    default:
+      enabled: true
+      default-schema: micronaut-aws-lambda-rest-sample
+      url: ${FLYWAY_DATASOURCES_DEFAULT_URL:`jdbc:mysql://CHANGE_ME:3306/?useSSL=false&characterEncoding=UTF-8`}
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: ${FLYWAY_DATASOURCES_DEFAULT_USERNAME:''}
+      password: ${FLYWAY_DATASOURCES_DEFAULT_PASSWORD:''}
+redis:
+  uri: ${REDIS_URI:`redis://mycachecluster.eaogs8.0001.usw2.cache.amazonaws.com`}
+javamail:
+  authentication:
+    username: ${SMTP_USERNAME:''}
+    password: ${SMTP_PASSWORD:''}
+  properties:
+    mail:
+      smtp:
+        host: ${SMTP_HOST:`email-smtp.us-west-2.amazonaws.com`}
+        port: ${SMTP_PORT:587}
+logger:
+  levels:
+    io.micronaut.data.query: DEBUG
+
+application:
+  fileUploadLocation: /tmp/sample

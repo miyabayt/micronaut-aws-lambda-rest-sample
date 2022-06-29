@@ -1,0 +1,16 @@
+{
+  "Variables": {
+    "MICRONAUT_ENVIRONMENTS": "dev",
+    "R2DBC_DATASOURCES_DEFAULT_URL": "r2dbc:mysql://CHANGE_ME:3306/micronaut-aws-lambda-rest-sample?useSSL=false&characterEncoding=UTF-8",
+    "R2DBC_DATASOURCES_DEFAULT_USERNAME": "root",
+    "R2DBC_DATASOURCES_DEFAULT_PASSWORD": "passw0rd",
+    "FLYWAY_DATASOURCES_DEFAULT_URL": "jdbc:mysql://CHANGE_ME:3306/?useSSL=false&characterEncoding=UTF-8",
+    "FLYWAY_DATASOURCES_DEFAULT_USERNAME": "root",
+    "FLYWAY_DATASOURCES_DEFAULT_PASSWORD": "passw0rd",
+    "REDIS_URI": "redis://mycachecluster.eaogs8.0001.usw2.cache.amazonaws.com:6379",
+    "SMTP_HOST": "email-smtp.us-west-2.amazonaws.com",
+    "SMTP_PORT": "587",
+    "SMTP_USERNAME": "username_OF_YourSESUser",
+    "SMTP_PASSWORD": "password_OF_YourSESUser"
+  }
+}
