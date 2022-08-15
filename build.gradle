@@ -71,7 +71,7 @@ dependencies {
     implementation "io.micronaut.data:micronaut-data-r2dbc"
     implementation "io.micronaut.sql:micronaut-jdbc-hikari"
     implementation "io.micronaut.flyway:micronaut-flyway"
-    implementation "jakarta.persistence:jakarta.persistence-api:3.0.0"
+    implementation "jakarta.persistence:jakarta.persistence-api:3.1.0"
     runtimeOnly "dev.miku:r2dbc-mysql"
     runtimeOnly "mysql:mysql-connector-java"
     runtimeOnly "org.flywaydb:flyway-mysql"
