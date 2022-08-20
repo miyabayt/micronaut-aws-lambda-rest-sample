@@ -109,6 +109,7 @@ public class RedisRefreshTokenPersistence implements RefreshTokenPersistence {
                         roleCodes ->
                             rolePermissionRepository
                                 .findByRoleCodeIn(roleCodes)
+                                .filter(RolePermission::getIsEnabled)
                                 .map(RolePermission::getPermissionCode)
                                 .collectList()
                                 .zipWith(Mono.just(roleCodes)))

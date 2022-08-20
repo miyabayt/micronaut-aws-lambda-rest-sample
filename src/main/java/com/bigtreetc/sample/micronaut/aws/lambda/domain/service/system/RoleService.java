@@ -181,6 +181,7 @@ public class RoleService {
   private Mono<Role> getPermissions(Role role) {
     val permissionCodes =
         role.getRolePermissions().stream()
+            .filter(RolePermission::getIsEnabled)
             .map(RolePermission::getPermissionCode)
             .collect(Collectors.toList());
     return permissionRepository
