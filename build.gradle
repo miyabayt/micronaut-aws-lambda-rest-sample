@@ -49,6 +49,7 @@ dependencies {
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
+    annotationProcessor platform("io.micronaut:micronaut-bom:${micronautVersion}")
     annotationProcessor "io.micronaut:micronaut-inject-java"
     annotationProcessor "io.micronaut:micronaut-http-validation"
     annotationProcessor "io.micronaut:micronaut-graal"
