@@ -4,7 +4,7 @@ plugins {
     id "idea"
     id "com.github.johnrengelman.shadow" version "7.1.2"
     id "io.micronaut.application" version "3.5.1"
-    id "com.avast.gradle.docker-compose" version "0.16.8"
+    id "com.avast.gradle.docker-compose" version "0.16.9"
     id "com.diffplug.spotless" version "${spotlessVersion}"
 }
 
