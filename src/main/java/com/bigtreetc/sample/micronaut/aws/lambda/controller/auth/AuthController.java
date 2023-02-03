@@ -3,7 +3,7 @@ package com.bigtreetc.sample.micronaut.aws.lambda.controller.auth;
 import com.bigtreetc.sample.micronaut.aws.lambda.base.exception.NoDataFoundException;
 import com.bigtreetc.sample.micronaut.aws.lambda.base.web.controller.api.AbstractRestController;
 import com.bigtreetc.sample.micronaut.aws.lambda.base.web.controller.api.response.ApiResponse;
-import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.system.StaffRepository;
+import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.StaffRepository;
 import com.nimbusds.jwt.JWTParser;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MutableHttpResponse;

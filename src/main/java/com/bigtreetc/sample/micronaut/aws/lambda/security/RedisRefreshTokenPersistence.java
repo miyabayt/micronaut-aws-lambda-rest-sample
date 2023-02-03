@@ -3,11 +3,11 @@ package com.bigtreetc.sample.micronaut.aws.lambda.security;
 import static io.micronaut.security.errors.IssuingAnAccessTokenErrorCode.INVALID_GRANT;
 
 import com.bigtreetc.sample.micronaut.aws.lambda.base.util.JacksonUtils;
-import com.bigtreetc.sample.micronaut.aws.lambda.domain.model.system.RolePermission;
-import com.bigtreetc.sample.micronaut.aws.lambda.domain.model.system.StaffRole;
-import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.system.RolePermissionRepository;
-import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.system.StaffRepository;
-import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.system.StaffRoleRepository;
+import com.bigtreetc.sample.micronaut.aws.lambda.domain.model.RolePermission;
+import com.bigtreetc.sample.micronaut.aws.lambda.domain.model.StaffRole;
+import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.RolePermissionRepository;
+import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.StaffRepository;
+import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.StaffRoleRepository;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.micronaut.runtime.event.annotation.EventListener;
 import io.micronaut.security.authentication.Authentication;
