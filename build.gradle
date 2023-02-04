@@ -82,7 +82,7 @@ dependencies {
     // runtimeOnly "org.postgresql:postgresql"
     runtimeOnly "ch.qos.logback:logback-classic"
 
-    implementation "io.micronaut.email:micronaut-email-javamail:1.3.2"
+    implementation "io.micronaut.email:micronaut-email-javamail:1.5.0"
     implementation "io.micronaut.email:micronaut-email-template"
     implementation "io.micronaut.views:micronaut-views-thymeleaf"
 
