@@ -1,4 +1,36 @@
 datasources:
   default:
-    url: jdbc:tc:mysql:8:///db
-    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+    schema-generate: NONE
+    db-type: mysql
+r2dbc:
+  datasources:
+    default:
+      db-type: mysql
+flyway:
+  datasources:
+    default:
+      enabled: true
+redis:
+  timeout: 30s
+javamail:
+  authentication:
+    username: ${SMTP_USERNAME:''}
+    password: ${SMTP_PASSWORD:''}
+  properties:
+    mail:
+      smtp:
+        host: 127.0.0.1
+        port: 1025
+logger:
+  levels:
+    io.micronaut.data.query: DEBUG
+
+application:
+  fileUploadLocation: build/sample
+
+test-resources:
+  containers:
+    mysql:
+      image-name: mysql:8
+    redis:
+      image-name: redis

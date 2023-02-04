@@ -3,7 +3,8 @@ plugins {
     id "groovy"
     id "idea"
     id "com.github.johnrengelman.shadow" version "7.1.2"
-    id "io.micronaut.application" version "3.5.3"
+    id "io.micronaut.application" version "3.6.5"
+    id "io.micronaut.test-resources" version "3.6.5"
     id "com.avast.gradle.docker-compose" version "0.16.9"
     id "com.diffplug.spotless" version "${spotlessVersion}"
 }
@@ -90,8 +91,13 @@ dependencies {
     implementation "io.swagger.core.v3:swagger-annotations"
     implementation "jakarta.annotation:jakarta.annotation-api"
 
+    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testImplementation "io.micronaut.test:micronaut-test-junit5"
+    testImplementation "io.micronaut.test:micronaut-test-rest-assured"
+    testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.testcontainers:r2dbc"
     testImplementation "org.testcontainers:mysql"
-    testImplementation "org.testcontainers:spock"
     testImplementation "org.testcontainers:testcontainers"
     testImplementation "io.micronaut:micronaut-function"
 }

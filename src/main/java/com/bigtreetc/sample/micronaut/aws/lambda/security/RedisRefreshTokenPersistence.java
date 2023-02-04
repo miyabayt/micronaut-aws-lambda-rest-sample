@@ -9,7 +9,7 @@ import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.RolePermissio
 import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.StaffRepository;
 import com.bigtreetc.sample.micronaut.aws.lambda.domain.repository.StaffRoleRepository;
 import io.lettuce.core.api.StatefulRedisConnection;
-import io.micronaut.runtime.event.annotation.EventListener;
+import io.micronaut.scheduling.annotation.Async;
 import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.errors.OauthErrorResponseException;
 import io.micronaut.security.token.event.RefreshTokenGeneratedEvent;
@@ -42,8 +42,8 @@ public class RedisRefreshTokenPersistence implements RefreshTokenPersistence {
 
   @Setter private int refreshTokenTimeoutHours = 2;
 
+  @Async
   @Override
-  @EventListener
   public void persistToken(RefreshTokenGeneratedEvent event) {
     if (event != null
         && event.getRefreshToken() != null
