@@ -137,4 +137,11 @@ tasks.withType(JavaCompile) {
     ]
 }
 
+tasks.named("test") {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
 compileJava.dependsOn "spotlessApply"
